@@ -22,6 +22,12 @@ class MyTestCase(unittest.TestCase):
             self.assertEqual(self.calculator.median(row['Value 1'],row['Value 2'],row['Value 3']), int(row['Result']))
             self.assertEqual(self.calculator.result, int(row['Result']))
 
+    def test_mode(self):
+        test_data = CsvReader('/Tests/Data/unit_test_mode.csv').data
+        for row in test_data:
+            self.assertEqual(self.calculator.mode(row['Value 1'],row['Value 2'],row['Value 3']), int(row['Result']))
+            self.assertEqual(self.calculator.result, int(row['Result']))
+
  '''
 
 
