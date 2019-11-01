@@ -47,6 +47,13 @@ class MyTestCase(unittest.TestCase):
             self.assertEqual(self.calculator.zscore(row['Value 1'],row['Value 2'],row['Value 3']), Decimal(row['Result']).quantize(Decimal('.001')))
             self.assertEqual(self.calculator.result, Decimal(row['Result']).quantize(Decimal('.001')))
 
+    def test_standardized_score(self):
+        test_data = CsvReader('/Tests/Data/unit_test_standardized_score.csv').data
+        for row in test_data:
+            self.assertEqual(self.calculator.standardized_score(row['Value 1'],row['Value 2'],row['Value 3']), Decimal(row['Result']).quantize(Decimal('.001')))
+            self.assertEqual(self.calculator.result, Decimal(row['Result']).quantize(Decimal('.001')))
+
+
  '''
 
 
