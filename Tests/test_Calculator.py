@@ -28,6 +28,13 @@ class MyTestCase(unittest.TestCase):
             self.assertEqual(self.calculator.mode(row['Value 1'],row['Value 2'],row['Value 3']), int(row['Result']))
             self.assertEqual(self.calculator.result, int(row['Result']))
 
+    def test_stdev(self):
+        test_data = CsvReader('/Tests/Data/unit_test_stdev.csv').data
+        for row in test_data:
+            self.assertEqual(self.calculator.stdev(row['Value 1'],row['Value 2'],row['Value 3']), Decimal(row['Result']).quantize(Decimal('.001')))
+            self.assertEqual(self.calculator.result, Decimal(row['Result']).quantize(Decimal('.001')))
+
+
  '''
 
 
