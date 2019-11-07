@@ -95,8 +95,34 @@ def p_value(a, b, c):
     a = int(a)
     b = int(b)
     c = int(c)
-    d = statistics.stdev(a, b, c)
+    d = stdev(a, b, c)
     e = 2 * abs(d)
+    return Decimal(e).quantize(Decimal('.001'))
+
+
+def proportion(a, b, c, d):
+    a = int(a)
+    b = int(b)
+    c = int(c)
+    d = int(d)
+    e = (a * b + c * d )/ (b + d)
+    return Decimal(e).quantize(Decimal('.001'))
+
+
+def sample_mean(a, b, c):
+    a = int(a)
+    b = int(b)
+    c = int(c)
+    d = (a + b + c)/ 3
+    return Decimal(d).quantize(Decimal('.001'))
+
+
+def sample_standard_deviation(a, b, c):
+    a = Decimal(a).quantize(Decimal('.001'))
+    b = Decimal(b).quantize(Decimal('.001'))
+    c = Decimal(c).quantize(Decimal('.001'))
+    d = (a + b + c)/ 3
+    e = math.sqrt(Decimal(((a - d)*(a - d) + (b - d)*(b - d) + (c - d)*(c - d)) / 2).quantize(Decimal('.001')))
     return Decimal(e).quantize(Decimal('.001'))
 
 
@@ -143,10 +169,21 @@ class Calculator:
         return self.result
 
     def population_variance(self, a, b, c):
-        self.result = confidence_interval(a, b, c)
+        self.result = population_variance(a, b, c)
         return self.result
 
     def p_value(self, a, b, c):
-        self.result = confidence_interval(a, b, c)
+        self.result = p_value(a, b, c)
         return self.result
 
+    def proportion(self, a, b, c, d):
+        self.result = proportion(a, b, c, d)
+        return self.result
+
+    def sample_mean(self, a, b, c):
+        self.result = sample_mean(a, b, c)
+        return self.result
+
+    def sample_standard_deviation(self, a, b, c):
+        self.result = sample_standard_deviation(a, b, c)
+        return self.result

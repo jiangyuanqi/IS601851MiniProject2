@@ -77,13 +77,42 @@ class MyTestCase(unittest.TestCase):
                 self.calculator.population_variance(row['Value 1'], row['Value 2'], row['Value 3']),
                 Decimal(row['Result']).quantize(Decimal('.001')))
             self.assertEqual(self.calculator.result, Decimal(row['Result']).quantize(Decimal('.001')))
-'''
+
+
 
     def test_p_value(self):
         test_data = CsvReader('/Tests/Data/unit_test_p_value.csv').data
         for row in test_data:
             self.assertEqual(
                 self.calculator.p_value(row['Value 1'], row['Value 2'], row['Value 3']),
+                Decimal(row['Result']).quantize(Decimal('.001')))
+            self.assertEqual(self.calculator.result, Decimal(row['Result']).quantize(Decimal('.001')))
+
+
+    def test_proportion(self):
+        test_data = CsvReader('/Tests/Data/unit_test_proportion.csv').data
+        for row in test_data:
+            self.assertEqual(
+                self.calculator.proportion(row['Value 1'], row['Value 2'], row['Value 3'], row['Value 4']),
+                Decimal(row['Result']).quantize(Decimal('.001')))
+            self.assertEqual(self.calculator.result, Decimal(row['Result']).quantize(Decimal('.001')))
+
+    
+    def test_sample_mean(self):
+        test_data = CsvReader('/Tests/Data/unit_test_sample_mean.csv').data
+        for row in test_data:
+            self.assertEqual(
+                self.calculator.sample_mean(row['Value 1'], row['Value 2'], row['Value 3']),
+                Decimal(row['Result']).quantize(Decimal('.001')))
+            self.assertEqual(self.calculator.result, Decimal(row['Result']).quantize(Decimal('.001')))
+
+    '''
+
+    def test_sample_standard_deviation(self):
+        test_data = CsvReader('/Tests/Data/unit_test_sample_standard_deviation.csv').data
+        for row in test_data:
+            self.assertEqual(
+                self.calculator.sample_standard_deviation(row['Value 1'], row['Value 2'], row['Value 3']),
                 Decimal(row['Result']).quantize(Decimal('.001')))
             self.assertEqual(self.calculator.result, Decimal(row['Result']).quantize(Decimal('.001')))
 
