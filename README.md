@@ -5,4 +5,4 @@
 # 10/30/2019
 
 ### Screenshot of the successful tests
-![tests_success](/Tests/Data/tests_success.png)
+![tests_success](/Tests/Data/project2_success.png)

@@ -126,6 +126,14 @@ def sample_standard_deviation(a, b, c):
     return Decimal(e).quantize(Decimal('.001'))
 
 
+def variance_of_sample_proportion(a, b, c):
+    a = int(a)
+    b = int(b)
+    c = int(c)
+    d = (a * b) / (c - 1)
+    return Decimal(d).quantize(Decimal('.001'))
+
+
 class Calculator:
     result = 0
 
@@ -186,4 +194,8 @@ class Calculator:
 
     def sample_standard_deviation(self, a, b, c):
         self.result = sample_standard_deviation(a, b, c)
+        return self.result
+
+    def variance_of_sample_proportion(self, a, b, c):
+        self.result = variance_of_sample_proportion(a, b, c)
         return self.result

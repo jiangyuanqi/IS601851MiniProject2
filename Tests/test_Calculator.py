@@ -9,13 +9,11 @@ class MyTestCase(unittest.TestCase):
     def setUp(self) -> None:
         self.calculator = Calculator()
 
-    '''
     def test_mean(self):
         test_data = CsvReader('/Tests/Data/unit_test_mean.csv').data
         for row in test_data:
             self.assertEqual(self.calculator.mean(row['Value 1'], row['Value 2']), int(row['Result']))
             self.assertEqual(self.calculator.result, int(row['Result']))
-
 
     def test_median(self):
         test_data = CsvReader('/Tests/Data/unit_test_median.csv').data
@@ -41,7 +39,6 @@ class MyTestCase(unittest.TestCase):
             self.assertEqual(self.calculator.variance(row['Value 1'],row['Value 2'],row['Value 3']), Decimal(row['Result']).quantize(Decimal('.001')))
             self.assertEqual(self.calculator.result, Decimal(row['Result']).quantize(Decimal('.001')))
 
-
     def test_zscore(self):
         test_data = CsvReader('/Tests/Data/unit_test_zscore.csv').data
         for row in test_data:
@@ -60,7 +57,6 @@ class MyTestCase(unittest.TestCase):
             self.assertEqual(self.calculator.population_correlation_coefficient(row['Value 1'],row['Value 2'],row['Value 3']), Decimal(row['Result']).quantize(Decimal('.001')))
             self.assertEqual(self.calculator.result, Decimal(row['Result']).quantize(Decimal('.001')))
 
-
     def test_confidence_interval(self):
         test_data = CsvReader('/Tests/Data/unit_test_confidence_interval.csv').data
         for row in test_data:
@@ -68,7 +64,6 @@ class MyTestCase(unittest.TestCase):
                 self.calculator.confidence_interval(row['Value 1'], row['Value 2'], row['Value 3']),
                 Decimal(row['Result']).quantize(Decimal('.001')))
             self.assertEqual(self.calculator.result, Decimal(row['Result']).quantize(Decimal('.001')))
-
 
     def test_population_variance(self):
         test_data = CsvReader('/Tests/Data/unit_test_population_variance.csv').data
@@ -78,8 +73,6 @@ class MyTestCase(unittest.TestCase):
                 Decimal(row['Result']).quantize(Decimal('.001')))
             self.assertEqual(self.calculator.result, Decimal(row['Result']).quantize(Decimal('.001')))
 
-
-
     def test_p_value(self):
         test_data = CsvReader('/Tests/Data/unit_test_p_value.csv').data
         for row in test_data:
@@ -87,7 +80,6 @@ class MyTestCase(unittest.TestCase):
                 self.calculator.p_value(row['Value 1'], row['Value 2'], row['Value 3']),
                 Decimal(row['Result']).quantize(Decimal('.001')))
             self.assertEqual(self.calculator.result, Decimal(row['Result']).quantize(Decimal('.001')))
-
 
     def test_proportion(self):
         test_data = CsvReader('/Tests/Data/unit_test_proportion.csv').data
@@ -97,7 +89,6 @@ class MyTestCase(unittest.TestCase):
                 Decimal(row['Result']).quantize(Decimal('.001')))
             self.assertEqual(self.calculator.result, Decimal(row['Result']).quantize(Decimal('.001')))
 
-    
     def test_sample_mean(self):
         test_data = CsvReader('/Tests/Data/unit_test_sample_mean.csv').data
         for row in test_data:
@@ -106,13 +97,19 @@ class MyTestCase(unittest.TestCase):
                 Decimal(row['Result']).quantize(Decimal('.001')))
             self.assertEqual(self.calculator.result, Decimal(row['Result']).quantize(Decimal('.001')))
 
-    '''
-
     def test_sample_standard_deviation(self):
         test_data = CsvReader('/Tests/Data/unit_test_sample_standard_deviation.csv').data
         for row in test_data:
             self.assertEqual(
                 self.calculator.sample_standard_deviation(row['Value 1'], row['Value 2'], row['Value 3']),
+                Decimal(row['Result']).quantize(Decimal('.001')))
+            self.assertEqual(self.calculator.result, Decimal(row['Result']).quantize(Decimal('.001')))
+
+    def test_variance_of_sample_proportion(self):
+        test_data = CsvReader('/Tests/Data/unit_test_variance_of_sample_proportion.csv').data
+        for row in test_data:
+            self.assertEqual(
+                self.calculator.variance_of_sample_proportion(row['Value 1'], row['Value 2'], row['Value 3']),
                 Decimal(row['Result']).quantize(Decimal('.001')))
             self.assertEqual(self.calculator.result, Decimal(row['Result']).quantize(Decimal('.001')))
 
