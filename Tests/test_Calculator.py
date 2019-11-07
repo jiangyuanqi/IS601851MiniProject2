@@ -113,6 +113,5 @@ class MyTestCase(unittest.TestCase):
                 Decimal(row['Result']).quantize(Decimal('.001')))
             self.assertEqual(self.calculator.result, Decimal(row['Result']).quantize(Decimal('.001')))
 
-
 if __name__ == '__main__':
     unittest.main()
