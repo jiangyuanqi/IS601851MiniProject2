@@ -68,13 +68,22 @@ class MyTestCase(unittest.TestCase):
                 self.calculator.confidence_interval(row['Value 1'], row['Value 2'], row['Value 3']),
                 Decimal(row['Result']).quantize(Decimal('.001')))
             self.assertEqual(self.calculator.result, Decimal(row['Result']).quantize(Decimal('.001')))
-'''
+
 
     def test_population_variance(self):
         test_data = CsvReader('/Tests/Data/unit_test_population_variance.csv').data
         for row in test_data:
             self.assertEqual(
                 self.calculator.population_variance(row['Value 1'], row['Value 2'], row['Value 3']),
+                Decimal(row['Result']).quantize(Decimal('.001')))
+            self.assertEqual(self.calculator.result, Decimal(row['Result']).quantize(Decimal('.001')))
+'''
+
+    def test_p_value(self):
+        test_data = CsvReader('/Tests/Data/unit_test_p_value.csv').data
+        for row in test_data:
+            self.assertEqual(
+                self.calculator.p_value(row['Value 1'], row['Value 2'], row['Value 3']),
                 Decimal(row['Result']).quantize(Decimal('.001')))
             self.assertEqual(self.calculator.result, Decimal(row['Result']).quantize(Decimal('.001')))
 

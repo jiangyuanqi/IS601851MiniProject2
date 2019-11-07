@@ -91,6 +91,15 @@ def population_variance(a, b, c):
     return Decimal(e).quantize(Decimal('.001'))
 
 
+def p_value(a, b, c):
+    a = int(a)
+    b = int(b)
+    c = int(c)
+    d = statistics.stdev(a, b, c)
+    e = 2 * abs(d)
+    return Decimal(e).quantize(Decimal('.001'))
+
+
 class Calculator:
     result = 0
 
@@ -134,6 +143,10 @@ class Calculator:
         return self.result
 
     def population_variance(self, a, b, c):
+        self.result = confidence_interval(a, b, c)
+        return self.result
+
+    def p_value(self, a, b, c):
         self.result = confidence_interval(a, b, c)
         return self.result
 
