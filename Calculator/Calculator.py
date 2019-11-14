@@ -3,7 +3,6 @@ from decimal import Decimal
 import statistics
 
 def add(nums):
-    nums = [num for num in nums]
     return sum(nums)
 
 def count(nums):
@@ -22,10 +21,10 @@ def mode(nums):
     count=nums.count(max(nums, key=nums.count))
     return sorted([int(num) for num in set(nums) if nums.count(num)==count])
 
-def stdev(nums):
-    return math.sqrt(variance(nums))
+def population_stdev(nums):
+    return math.sqrt(population_variance(nums))
 
-def variance(nums,):
+def population_variance(nums,):
     return mean([(num-mean(nums))**2 for num in nums])
 
 def zscore(nums, sample):
@@ -87,12 +86,12 @@ class Calculator:
         self.result = mode(nums)
         return self.result
 
-    def stdev(self, nums):
-        self.result = stdev(nums)
+    def population_stdev(self, nums):
+        self.result = population_stdev(nums)
         return self.result
 
-    def variance(self, nums):
-        self.result = variance(nums)
+    def population_variance(self, nums):
+        self.result = population_variance(nums)
         return self.result
 
     def zscore(self, nums, sample):
