@@ -25,31 +25,14 @@ def mode(nums):
     return sorted([int(num) for num in set(nums) if nums.count(num)==count])
 
 
-def stdev(a, b, c):
-    a = int(a)
-    b = int(b)
-    c = int(c)
-    d = statistics.stdev([a, b, c])
-    return Decimal(d).quantize(Decimal('.001'))
+def stdev(nums):
+    return math.sqrt(variance(nums))
 
+def variance(nums,):
+    return mean([(num-mean(nums))**2 for num in nums])
 
-def variance(a, b, c):
-    a = int(a)
-    b = int(b)
-    c = int(c)
-    d = statistics.variance([a, b, c])
-    return Decimal(d).quantize(Decimal('.001'))
-
-
-def zscore(a, b, c):
-    a = int(a)
-    b = int(b)
-    c = int(c)
-    d = statistics.stdev([a, b, c])
-    e = ( a + b + c) / 3
-    f = (a - e)/ d
-    return Decimal(f).quantize(Decimal('.001'))
-
+def zscore(nums, sample):
+    return (sample-mean(nums))/stdev(nums)
 
 def standardized_score(a, b, c):
     a = int(a)
@@ -151,16 +134,16 @@ class Calculator:
         self.result = mode(nums)
         return self.result
 
-    def stdev(self, a, b, c):
-        self.result = stdev(a, b, c)
+    def stdev(self, nums):
+        self.result = stdev(nums)
         return self.result
 
-    def variance(self, a, b, c):
-        self.result = variance(a, b, c)
+    def variance(self, nums):
+        self.result = variance(nums)
         return self.result
 
-    def zscore(self, a, b, c):
-        self.result = zscore(a, b, c)
+    def zscore(self, nums, sample):
+        self.result = zscore(nums, sample)
         return self.result
 
     def standardized_score(self, a, b, c):
