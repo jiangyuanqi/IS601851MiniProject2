@@ -8,7 +8,7 @@ def add(nums):
 def count(nums):
     return len(nums)
 
-def mean(nums):
+def population_mean(nums):
     return add(nums)/count(nums)
 
 def median(nums):
@@ -28,7 +28,7 @@ def population_variance(nums,):
     return mean([(num-mean(nums))**2 for num in nums])
 
 def zscore(nums, sample):
-    return (sample-mean(nums))/stdev(nums)
+    return (sample-mean(nums))/population_stdev(nums)
 
 def standardized_score(nums, sample):
     return zscore(nums,sample)
@@ -36,37 +36,26 @@ def standardized_score(nums, sample):
 def population_correlation_coefficient(numsx, numsy):
     return mean([(numsx[idx]-mean(numsx))*(numsy[idx]-mean(numsy)) for idx, num in enumerate(numsx)])/(stdev(numsx)*stdev(numsy))
 
-def confidence_interval(a, b, c):
-    a = int(a)
-    b = int(b)
-    c = int(c)
-    d = zscore(a, b, c)
-    e = stdev(a, b, c)
-    f = d * e / Decimal(math.sqrt(3)).quantize(Decimal('.001'))
-    return Decimal(f).quantize(Decimal('.001'))
+#this function will calculate a 95% confidence interval for the mean of a large sample size
+def confidence_interval(nums, sampleMean):
+    marginOfError=1.96*(sampleMean/math.sqrt(count(nums)))
+    return (sampleMean-marginOfError,sampleMean+marginOfError)
 
-def population_variance(nums):
-    return variance(nums)
 
-def p_value(a, b, c):
-    a = int(a)
-    b = int(b)
-    c = int(c)
-    d = stdev(a, b, c)
-    e = 2 * abs(d)
-    return Decimal(e).quantize(Decimal('.001'))
+def p_value(nums, hypothesisMean, populationMean, populationStdev):
+    return (sample_mean(nums)-hypothesisMean)/(populationStdev/math.sqrt(count(nums)))
 
 def proportion(a, b):
     return a/b
 
 def sample_mean(nums):
-    return mean(nums)
+    return population_mean(nums)
 
 def sample_standard_deviation(nums):
     return math.sqrt(variance_of_sample_proportion(nums))
 
 def variance_of_sample_proportion(nums):
-    return variance(nums)*count(nums)/(count(nums)-1)
+    return population_variance(nums)*count(nums)/(count(nums)-1)
 
 class Calculator:
     result = 0
@@ -74,8 +63,8 @@ class Calculator:
     def __init__(self):
         pass
 
-    def mean(self, nums):
-        self.result = mean(nums)
+    def population_mean(self, nums):
+        self.result = population_mean(nums)
         return self.result
 
     def median(self, nums):
@@ -106,16 +95,12 @@ class Calculator:
         self.result = population_correlation_coefficient(numsx, numsy)
         return self.result
 
-    def confidence_interval(self, a, b, c):
-        self.result = confidence_interval(a, b, c)
+    def confidence_interval(self, nums, sampleMean):
+        self.result = confidence_interval(nums, sampleMean)
         return self.result
 
-    def population_variance(self, nums):
-        self.result = population_variance(nums)
-        return self.result
-
-    def p_value(self, a, b, c):
-        self.result = p_value(a, b, c)
+    def p_value(self, nums, hypothesisMean, populationMean, populationStdev):
+        self.result = p_value(nums, hypothesisMean, populationMean, populationStdev)
         return self.result
 
     def proportion(self, a, b):
