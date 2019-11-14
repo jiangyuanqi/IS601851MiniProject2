@@ -2,15 +2,18 @@ import math
 from decimal import Decimal
 import statistics
 
+def add(nums):
+    nums = [int(num) for num in nums]
+    return sum(nums)
 
-def mean(a, b):
-    a = int(a)
-    b = int(b)
-    c = ( a + b ) / 2
-    return c
+def count(nums):
+    return len(nums)
+
+def mean(nums):
+    return add(nums)/count(nums)
 
 
-def median(a, b, c):
+def median(nums):
     a = int(a)
     b = int(b)
     c = int(c)
