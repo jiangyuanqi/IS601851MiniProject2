@@ -14,19 +14,15 @@ def mean(nums):
 
 
 def median(nums):
-    a = int(a)
-    b = int(b)
-    c = int(c)
-    d = statistics.median([a, b, c])
-    return d
+    if len(nums)%2==1:
+        return sorted(nums)[int(len(nums)/2)]
+    else:
+        return mean(sorted(nums)[int(len(nums)/2)-1:int(len(nums)/2)+1])
 
 
-def mode(a, b, c):
-    a = int(a)
-    b = int(b)
-    c = int(c)
-    d = statistics.mode([a, b, c])
-    return d
+def mode(nums):
+    count=nums.count(max(nums, key=nums.count))
+    return sorted([int(num) for num in set(nums) if nums.count(num)==count])
 
 
 def stdev(a, b, c):
@@ -143,16 +139,16 @@ class Calculator:
     def __init__(self):
         pass
 
-    def mean(self, a, b):
-        self.result = mean(a, b)
+    def mean(self, nums):
+        self.result = mean(nums)
         return self.result
 
-    def median(self, a, b, c):
-        self.result = median(a, b, c)
+    def median(self, nums):
+        self.result = median(nums)
         return self.result
 
-    def mode(self, a, b, c):
-        self.result = mode(a, b, c)
+    def mode(self, nums):
+        self.result = mode(nums)
         return self.result
 
     def stdev(self, a, b, c):
