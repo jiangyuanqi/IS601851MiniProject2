@@ -3,7 +3,7 @@ from decimal import Decimal
 import statistics
 
 def add(nums):
-    nums = [int(num) for num in nums]
+    nums = [num for num in nums]
     return sum(nums)
 
 def count(nums):
@@ -12,18 +12,15 @@ def count(nums):
 def mean(nums):
     return add(nums)/count(nums)
 
-
 def median(nums):
     if len(nums)%2==1:
         return sorted(nums)[int(len(nums)/2)]
     else:
         return mean(sorted(nums)[int(len(nums)/2)-1:int(len(nums)/2)+1])
 
-
 def mode(nums):
     count=nums.count(max(nums, key=nums.count))
     return sorted([int(num) for num in set(nums) if nums.count(num)==count])
-
 
 def stdev(nums):
     return math.sqrt(variance(nums))
@@ -34,25 +31,11 @@ def variance(nums,):
 def zscore(nums, sample):
     return (sample-mean(nums))/stdev(nums)
 
-def standardized_score(a, b, c):
-    a = int(a)
-    b = int(b)
-    c = int(c)
-    d = statistics.stdev([a, b, c])
-    e = ( a + b + c) / 3
-    f = (a - e)/ d
-    return Decimal(f).quantize(Decimal('.001'))
+def standardized_score(nums, sample):
+    return zscore(nums,sample)
 
-
-def population_correlation_coefficient(a, b, c):
-    a = int(a)
-    b = int(b)
-    c = int(c)
-    d = statistics.stdev([a, b, c])
-    e = ( a + b + c) / 3
-    f = ((a - e)/ d +(b - e)/ d +(c - e)/ d)/ 3
-    return Decimal(f).quantize(Decimal('.001'))
-
+def population_correlation_coefficient(numsx, numsy):
+    return mean([(numsx[idx]-mean(numsx))*(numsy[idx]-mean(numsy)) for idx, num in enumerate(numsx)])/(stdev(numsx)*stdev(numsy))
 
 def confidence_interval(a, b, c):
     a = int(a)
@@ -63,15 +46,8 @@ def confidence_interval(a, b, c):
     f = d * e / Decimal(math.sqrt(3)).quantize(Decimal('.001'))
     return Decimal(f).quantize(Decimal('.001'))
 
-
-def population_variance(a, b, c):
-    a = int(a)
-    b = int(b)
-    c = int(c)
-    d = stdev(a, b, c)
-    e = d * d
-    return Decimal(e).quantize(Decimal('.001'))
-
+def population_variance(nums):
+    return variance(nums)
 
 def p_value(a, b, c):
     a = int(a)
@@ -81,40 +57,17 @@ def p_value(a, b, c):
     e = 2 * abs(d)
     return Decimal(e).quantize(Decimal('.001'))
 
+def proportion(a, b):
+    return a/b
 
-def proportion(a, b, c, d):
-    a = int(a)
-    b = int(b)
-    c = int(c)
-    d = int(d)
-    e = (a * b + c * d )/ (b + d)
-    return Decimal(e).quantize(Decimal('.001'))
+def sample_mean(nums):
+    return mean(nums)
 
+def sample_standard_deviation(nums):
+    return math.sqrt(variance_of_sample_proportion(nums))
 
-def sample_mean(a, b, c):
-    a = int(a)
-    b = int(b)
-    c = int(c)
-    d = (a + b + c)/ 3
-    return Decimal(d).quantize(Decimal('.001'))
-
-
-def sample_standard_deviation(a, b, c):
-    a = Decimal(a).quantize(Decimal('.001'))
-    b = Decimal(b).quantize(Decimal('.001'))
-    c = Decimal(c).quantize(Decimal('.001'))
-    d = (a + b + c)/ 3
-    e = math.sqrt(Decimal(((a - d)*(a - d) + (b - d)*(b - d) + (c - d)*(c - d)) / 2).quantize(Decimal('.001')))
-    return Decimal(e).quantize(Decimal('.001'))
-
-
-def variance_of_sample_proportion(a, b, c):
-    a = int(a)
-    b = int(b)
-    c = int(c)
-    d = (a * b) / (c - 1)
-    return Decimal(d).quantize(Decimal('.001'))
-
+def variance_of_sample_proportion(nums):
+    return variance(nums)*count(nums)/(count(nums)-1)
 
 class Calculator:
     result = 0
@@ -146,38 +99,38 @@ class Calculator:
         self.result = zscore(nums, sample)
         return self.result
 
-    def standardized_score(self, a, b, c):
-        self.result = standardized_score(a, b, c)
+    def standardized_score(self, nums, sample):
+        self.result = standardized_score(nums, sample)
         return self.result
 
-    def population_correlation_coefficient(self, a, b, c):
-        self.result = population_correlation_coefficient(a, b, c)
+    def population_correlation_coefficient(self, numsx, numsy):
+        self.result = population_correlation_coefficient(numsx, numsy)
         return self.result
 
     def confidence_interval(self, a, b, c):
         self.result = confidence_interval(a, b, c)
         return self.result
 
-    def population_variance(self, a, b, c):
-        self.result = population_variance(a, b, c)
+    def population_variance(self, nums):
+        self.result = population_variance(nums)
         return self.result
 
     def p_value(self, a, b, c):
         self.result = p_value(a, b, c)
         return self.result
 
-    def proportion(self, a, b, c, d):
-        self.result = proportion(a, b, c, d)
+    def proportion(self, a, b):
+        self.result = proportion(a, b)
         return self.result
 
-    def sample_mean(self, a, b, c):
-        self.result = sample_mean(a, b, c)
+    def sample_mean(self, nums):
+        self.result = sample_mean(nums)
         return self.result
 
-    def sample_standard_deviation(self, a, b, c):
-        self.result = sample_standard_deviation(a, b, c)
+    def sample_standard_deviation(self, nums):
+        self.result = sample_standard_deviation(nums)
         return self.result
 
-    def variance_of_sample_proportion(self, a, b, c):
-        self.result = variance_of_sample_proportion(a, b, c)
+    def variance_of_sample_proportion(self, nums):
+        self.result = variance_of_sample_proportion(nums)
         return self.result
