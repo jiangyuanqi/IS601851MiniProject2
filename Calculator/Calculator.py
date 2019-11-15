@@ -41,7 +41,6 @@ def confidence_interval(nums, sampleMean):
     marginOfError=1.96*(sampleMean/math.sqrt(count(nums)))
     return (sampleMean-marginOfError,sampleMean+marginOfError)
 
-
 def p_value(nums, hypothesisMean, populationMean, populationStdev):
     return (sample_mean(nums)-hypothesisMean)/(populationStdev/math.sqrt(count(nums)))
 

@@ -10,11 +10,16 @@ class MyTestCase(unittest.TestCase):
         self.calculator = Calculator()
 
     def test_mean(self):
-        test_data = CsvReader('/Tests/Data/unit_test_mean.csv').data
+        test_data = CsvReader('unit_test_mean.csv').data
         for row in test_data:
-            self.assertEqual(self.calculator.mean(row['Value 1'], row['Value 2']), int(row['Result']))
-            self.assertEqual(self.calculator.result, int(row['Result']))
+            nums = [int(val) for val in row['nums'].split('_')]
+            result = int(row['Result'])
+            self.assertEqual(self.calculator.population_mean(nums), result)
+            self.assertEqual(self.calculator.result, result)
+            self.assertNotEqual(self.calculator.population_mean(nums), result-1)
+            self.assertNotEqual(self.calculator.result, result-1)
 
+"""
     def test_median(self):
         test_data = CsvReader('/Tests/Data/unit_test_median.csv').data
         for row in test_data:
@@ -112,6 +117,6 @@ class MyTestCase(unittest.TestCase):
                 self.calculator.variance_of_sample_proportion(row['Value 1'], row['Value 2'], row['Value 3']),
                 Decimal(row['Result']).quantize(Decimal('.001')))
             self.assertEqual(self.calculator.result, Decimal(row['Result']).quantize(Decimal('.001')))
-
+"""
 if __name__ == '__main__':
-    unittest.main()
+    unittest.main()l
