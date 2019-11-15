@@ -52,13 +52,17 @@ class MyTestCase(unittest.TestCase):
             self.assertAlmostEqual(self.calculator.result, result)
             self.assertNotEqual(self.calculator.sample_standard_deviation(nums), result-1)
             self.assertNotEqual(self.calculator.result, result-1)
-"""
-    def test_variance(self):
-        test_data = CsvReader('/Tests/Data/unit_test_variance.csv').data
-        for row in test_data:
-            self.assertEqual(self.calculator.variance(row['Value 1'],row['Value 2'],row['Value 3']), Decimal(row['Result']).quantize(Decimal('.001')))
-            self.assertEqual(self.calculator.result, Decimal(row['Result']).quantize(Decimal('.001')))
 
+    def test_population_variance(self):
+        test_data = CsvReader('./Tests/Data/unit_test_population_variance.csv').data
+        for row in test_data:
+            nums = [float(val) for val in row['nums'].split('_')]
+            result = float(row['result'])
+            self.assertAlmostEqual(self.calculator.population_variance(nums), result)
+            self.assertAlmostEqual(self.calculator.result, result)
+            self.assertNotEqual(self.calculator.population_variance(nums), result-1)
+            self.assertNotEqual(self.calculator.result, result-1)
+"""
     def test_zscore(self):
         test_data = CsvReader('/Tests/Data/unit_test_zscore.csv').data
         for row in test_data:
