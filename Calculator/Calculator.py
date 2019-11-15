@@ -15,7 +15,7 @@ def median(nums):
     if len(nums)%2==1:
         return sorted(nums)[int(len(nums)/2)]
     else:
-        return mean(sorted(nums)[int(len(nums)/2)-1:int(len(nums)/2)+1])
+        return population_mean(sorted(nums)[int(len(nums)/2)-1:int(len(nums)/2)+1])
 
 def mode(nums):
     count=nums.count(max(nums, key=nums.count))
