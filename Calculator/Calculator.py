@@ -8,6 +8,10 @@ def add(nums):
 def count(nums):
     return len(nums)
 
+def mean(nums):
+    return population_mean(nums)
+
+
 def population_mean(nums):
     return add(nums)/count(nums)
 
@@ -15,7 +19,7 @@ def median(nums):
     if len(nums)%2==1:
         return sorted(nums)[int(len(nums)/2)]
     else:
-        return population_mean(sorted(nums)[int(len(nums)/2)-1:int(len(nums)/2)+1])
+        return mean(sorted(nums)[int(len(nums)/2)-1:int(len(nums)/2)+1])
 
 def mode(nums):
     count=nums.count(max(nums, key=nums.count))

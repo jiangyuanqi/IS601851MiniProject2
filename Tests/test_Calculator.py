@@ -42,13 +42,17 @@ class MyTestCase(unittest.TestCase):
                 result.append(0)
             self.assertNotEqual(self.calculator.mode(nums), result)
             self.assertNotEqual(self.calculator.result, result)
-"""            
-    def test_stdev(self):
-        test_data = CsvReader('/Tests/Data/unit_test_stdev.csv').data
+
+    def test_sample_standard_deviation(self):
+        test_data = CsvReader('./Tests/Data/unit_test_sample_standard_deviation.csv').data
         for row in test_data:
-            self.assertEqual(self.calculator.stdev(row['Value 1'],row['Value 2'],row['Value 3']), Decimal(row['Result']).quantize(Decimal('.001')))
-            self.assertEqual(self.calculator.result, Decimal(row['Result']).quantize(Decimal('.001')))
-            
+            nums = [float(val) for val in row['nums'].split('_')]
+            result = float(row['result'])
+            self.assertAlmostEqual(self.calculator.sample_standard_deviation(nums), result)
+            self.assertAlmostEqual(self.calculator.result, result)
+            self.assertNotEqual(self.calculator.sample_standard_deviation(nums), result-1)
+            self.assertNotEqual(self.calculator.result, result-1)
+"""
     def test_variance(self):
         test_data = CsvReader('/Tests/Data/unit_test_variance.csv').data
         for row in test_data:
