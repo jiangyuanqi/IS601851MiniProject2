@@ -137,22 +137,16 @@ class MyTestCase(unittest.TestCase):
             self.assertEqual(self.calculator.result, result)
             self.assertNotEqual(self.calculator.population_mean(nums), result-1)
             self.assertNotEqual(self.calculator.result, result-1)
-"""
-    def test_sample_standard_deviation(self):
-        test_data = CsvReader('/Tests/Data/unit_test_sample_standard_deviation.csv').data
-        for row in test_data:
-            self.assertEqual(
-                self.calculator.sample_standard_deviation(row['Value 1'], row['Value 2'], row['Value 3']),
-                Decimal(row['Result']).quantize(Decimal('.001')))
-            self.assertEqual(self.calculator.result, Decimal(row['Result']).quantize(Decimal('.001')))
 
     def test_variance_of_sample_proportion(self):
-        test_data = CsvReader('/Tests/Data/unit_test_variance_of_sample_proportion.csv').data
+        test_data = CsvReader('./Tests/Data/unit_test_variance_of_sample_proportion.csv').data
         for row in test_data:
-            self.assertEqual(
-                self.calculator.variance_of_sample_proportion(row['Value 1'], row['Value 2'], row['Value 3']),
-                Decimal(row['Result']).quantize(Decimal('.001')))
-            self.assertEqual(self.calculator.result, Decimal(row['Result']).quantize(Decimal('.001')))
-"""
+            nums = [float(val) for val in row['nums'].split('_')]
+            result = float(row['result'])
+            self.assertEqual(self.calculator.variance_of_sample_proportion(nums), result)
+            self.assertEqual(self.calculator.result, result)
+            self.assertNotEqual(self.calculator.variance_of_sample_proportion(nums), result-1)
+            self.assertNotEqual(self.calculator.result, result-1)
+
 if __name__ == '__main__':
     unittest.main()
