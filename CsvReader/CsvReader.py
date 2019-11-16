@@ -1,6 +1,5 @@
 import csv
-from Fileutilities.absolutepath import absolutepath
-
+from os import path
 
 def ClassFactory(class_name, dictionary):
     return type(class_name, (object,), dictionary)
@@ -11,7 +10,8 @@ class CsvReader:
 
     def __init__(self, filepath):
         self.data = []
-
+        if not path.exists(filepath):
+            raise FileNotFoundError("file not found")
         with open(filepath) as text_data:
             csv_data = csv.DictReader(text_data, delimiter=',')
             for row in csv_data:
