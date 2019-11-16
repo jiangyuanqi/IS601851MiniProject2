@@ -12,8 +12,8 @@ class MyTestCase(unittest.TestCase):
     def test_mean(self):
         test_data = CsvReader('./Tests/Data/unit_test_mean.csv').data
         for row in test_data:
-            nums = [int(val) for val in row['nums'].split('_')]
-            result = int(row['result'])
+            nums = [float(val) for val in row['nums'].split('_')]
+            result = float(row['result'])
             self.assertEqual(self.calculator.population_mean(nums), result)
             self.assertEqual(self.calculator.result, result)
             self.assertNotEqual(self.calculator.population_mean(nums), result-1)
@@ -116,23 +116,28 @@ class MyTestCase(unittest.TestCase):
     #             self.calculator.p_value(row['Value 1'], row['Value 2'], row['Value 3']),
     #             Decimal(row['Result']).quantize(Decimal('.001')))
     #         self.assertEqual(self.calculator.result, Decimal(row['Result']).quantize(Decimal('.001')))
-"""
+
     def test_proportion(self):
-        test_data = CsvReader('/Tests/Data/unit_test_proportion.csv').data
+        test_data = CsvReader('./Tests/Data/unit_test_proportion.csv').data
         for row in test_data:
-            self.assertEqual(
-                self.calculator.proportion(row['Value 1'], row['Value 2'], row['Value 3'], row['Value 4']),
-                Decimal(row['Result']).quantize(Decimal('.001')))
-            self.assertEqual(self.calculator.result, Decimal(row['Result']).quantize(Decimal('.001')))
+            a = float(row['a'])
+            b = float(row['b'])
+            result = float(row['result'])
+            self.assertAlmostEqual(self.calculator.proportion(a, b), result)
+            self.assertAlmostEqual(self.calculator.result, result)
+            self.assertNotEqual(self.calculator.proportion(a, b), result-1)
+            self.assertNotEqual(self.calculator.result, result-1)
 
     def test_sample_mean(self):
-        test_data = CsvReader('/Tests/Data/unit_test_sample_mean.csv').data
+        test_data = CsvReader('./Tests/Data/unit_test_sample_mean.csv').data
         for row in test_data:
-            self.assertEqual(
-                self.calculator.sample_mean(row['Value 1'], row['Value 2'], row['Value 3']),
-                Decimal(row['Result']).quantize(Decimal('.001')))
-            self.assertEqual(self.calculator.result, Decimal(row['Result']).quantize(Decimal('.001')))
-
+            nums = [float(val) for val in row['nums'].split('_')]
+            result = float(row['result'])
+            self.assertEqual(self.calculator.population_mean(nums), result)
+            self.assertEqual(self.calculator.result, result)
+            self.assertNotEqual(self.calculator.population_mean(nums), result-1)
+            self.assertNotEqual(self.calculator.result, result-1)
+"""
     def test_sample_standard_deviation(self):
         test_data = CsvReader('/Tests/Data/unit_test_sample_standard_deviation.csv').data
         for row in test_data:
