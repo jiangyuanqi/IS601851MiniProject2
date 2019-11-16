@@ -61,3 +61,7 @@ class Calculator:
     def variance_of_sample_proportion(self, nums):
         self.result = self.stat.variance_of_sample_proportion(nums)
         return self.result
+
+    def variance_of_population_proportion(self, nums):
+        self.result = self.stat.variance_of_population_proportion(nums)
+        return self.result

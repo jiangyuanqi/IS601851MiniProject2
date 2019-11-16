@@ -14,8 +14,8 @@ class MyTestCase(unittest.TestCase):
         for row in test_data:
             nums = [float(val) for val in row['nums'].split('_')]
             result = float(row['result'])
-            self.assertEqual(self.calculator.population_mean(nums), result)
-            self.assertEqual(self.calculator.result, result)
+            self.assertAlmostEqual(self.calculator.population_mean(nums), result)
+            self.assertAlmostEqual(self.calculator.result, result)
             self.assertNotEqual(self.calculator.population_mean(nums), result-1)
             self.assertNotEqual(self.calculator.result, result-1)
 
@@ -24,8 +24,8 @@ class MyTestCase(unittest.TestCase):
         for row in test_data:
             nums = [float(val) for val in row['nums'].split('_')]
             result = float(row['result'])
-            self.assertEqual(self.calculator.median(nums), result)
-            self.assertEqual(self.calculator.result, result)
+            self.assertAlmostEqual(self.calculator.median(nums), result)
+            self.assertAlmostEqual(self.calculator.result, result)
             self.assertNotEqual(self.calculator.median(nums), result-1)
             self.assertNotEqual(self.calculator.result, result-1)
             
@@ -34,8 +34,8 @@ class MyTestCase(unittest.TestCase):
         for row in test_data:
             nums = [float(val) for val in row['nums'].split('_')]
             result = [float(val) for val in row['result'].split('_') if val != '']
-            self.assertEqual(self.calculator.mode(nums), result)
-            self.assertEqual(self.calculator.result, result)
+            self.assertAlmostEqual(self.calculator.mode(nums), result)
+            self.assertAlmostEqual(self.calculator.result, result)
             if len(result) !=0:#add some other number so we can check if the mode is not equal
                 result.append(result[0])
             else:
@@ -51,6 +51,16 @@ class MyTestCase(unittest.TestCase):
             self.assertAlmostEqual(self.calculator.sample_standard_deviation(nums), result)
             self.assertAlmostEqual(self.calculator.result, result)
             self.assertNotEqual(self.calculator.sample_standard_deviation(nums), result-1)
+            self.assertNotEqual(self.calculator.result, result-1)
+
+    def test_population_standard_deviation(self):
+        test_data = CsvReader('./Tests/Data/unit_test_population_standard_deviation.csv').data
+        for row in test_data:
+            nums = [float(val) for val in row['nums'].split('_')]
+            result = float(row['result'])
+            self.assertAlmostEqual(self.calculator.population_stdev(nums), result)
+            self.assertAlmostEqual(self.calculator.result, result)
+            self.assertNotEqual(self.calculator.population_stdev(nums), result-1)
             self.assertNotEqual(self.calculator.result, result-1)
 
     def test_population_variance(self):
@@ -137,8 +147,8 @@ class MyTestCase(unittest.TestCase):
         for row in test_data:
             nums = [float(val) for val in row['nums'].split('_')]
             result = float(row['result'])
-            self.assertEqual(self.calculator.population_mean(nums), result)
-            self.assertEqual(self.calculator.result, result)
+            self.assertAlmostEqual(self.calculator.population_mean(nums), result)
+            self.assertAlmostEqual(self.calculator.result, result)
             self.assertNotEqual(self.calculator.population_mean(nums), result-1)
             self.assertNotEqual(self.calculator.result, result-1)
 
@@ -147,9 +157,19 @@ class MyTestCase(unittest.TestCase):
         for row in test_data:
             nums = [float(val) for val in row['nums'].split('_')]
             result = float(row['result'])
-            self.assertEqual(self.calculator.variance_of_sample_proportion(nums), result)
-            self.assertEqual(self.calculator.result, result)
+            self.assertAlmostEqual(self.calculator.variance_of_sample_proportion(nums), result)
+            self.assertAlmostEqual(self.calculator.result, result)
             self.assertNotEqual(self.calculator.variance_of_sample_proportion(nums), result-1)
+            self.assertNotEqual(self.calculator.result, result-1)
+   
+    def test_variance_of_population_proportion(self):
+        test_data = CsvReader('./Tests/Data/unit_test_variance_of_population_proportion.csv').data
+        for row in test_data:
+            nums = [float(val) for val in row['nums'].split('_')]
+            result = float(row['result'])
+            self.assertAlmostEqual(self.calculator.variance_of_population_proportion(nums), result)
+            self.assertAlmostEqual(self.calculator.result, result)
+            self.assertNotEqual(self.calculator.variance_of_population_proportion(nums), result-1)
             self.assertNotEqual(self.calculator.result, result-1)
 
 if __name__ == '__main__':

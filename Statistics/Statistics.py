@@ -61,4 +61,6 @@ class Statistics:
 
     def variance_of_sample_proportion(self,nums):
         return self.population_variance(nums)*self.count(nums)/(self.count(nums)-1)
-
+    
+    def variance_of_population_proportion(self,nums):
+        return self.population_variance(nums)
