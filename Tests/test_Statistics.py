@@ -1,6 +1,5 @@
 import unittest
 import math
-from decimal import Decimal
 from Statistics.Statistics import Statistics as statistic
 from CsvReader.CsvReader import CsvReader
 
