@@ -109,13 +109,17 @@ class MyTestCase(unittest.TestCase):
             self.assertNotEqual(val[1], result[1]-1)
             
 
-    # def test_p_value(self):
-    #     test_data = CsvReader('/Tests/Data/unit_test_p_value.csv').data
-    #     for row in test_data:
-    #         self.assertEqual(
-    #             self.calculator.p_value(row['Value 1'], row['Value 2'], row['Value 3']),
-    #             Decimal(row['Result']).quantize(Decimal('.001')))
-    #         self.assertEqual(self.calculator.result, Decimal(row['Result']).quantize(Decimal('.001')))
+    def test_p_value(self):
+        test_data = CsvReader('./Tests/Data/unit_test_p_value.csv').data
+        for row in test_data:
+            nums = [float(val) for val in row['nums'].split('_')]
+            hypothesisMean = float(row['hypothesisMean'])
+            populationStdev = float(row['populationStdev'])
+            result = float(row['result'])
+            self.assertAlmostEqual(self.calculator.p_value(nums, hypothesisMean, populationStdev), result)
+            self.assertAlmostEqual(self.calculator.result, result)
+            self.assertNotEqual(self.calculator.p_value(nums, hypothesisMean, populationStdev), result-1)
+            self.assertNotEqual(self.calculator.result, result-1)
 
     def test_proportion(self):
         test_data = CsvReader('./Tests/Data/unit_test_proportion.csv').data

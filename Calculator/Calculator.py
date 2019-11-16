@@ -42,8 +42,8 @@ class Calculator:
         self.result = self.stat.confidence_interval(nums, sampleMean)
         return self.result
 
-    def p_value(self, nums, hypothesisMean, populationMean, populationStdev):
-        self.result = self.stat.p_value(nums, hypothesisMean, populationMean, populationStdev)
+    def p_value(self, nums, hypothesisMean, populationStdev):
+        self.result = self.stat.p_value(nums, hypothesisMean, populationStdev)
         return self.result
 
     def proportion(self, a, b):

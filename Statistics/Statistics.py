@@ -47,7 +47,7 @@ class Statistics:
         marginOfError=1.96*(sampleMean/math.sqrt(self.count(nums)))
         return (sampleMean-marginOfError,sampleMean+marginOfError)
 
-    def p_value(self,nums, hypothesisMean, populationMean, populationStdev):
+    def p_value(self,nums, hypothesisMean, populationStdev):
         return (self.sample_mean(nums)-hypothesisMean)/(populationStdev/math.sqrt(self.count(nums)))
 
     def proportion(self,a, b):
