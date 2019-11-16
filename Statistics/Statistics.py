@@ -40,7 +40,7 @@ class Statistics:
         return self.zscore(nums,sample)
 
     def population_correlation_coefficient(self,numsx, numsy):
-        return self.mean([(numsx[idx]-self.mean(numsx))*(numsy[idx]-self.mean(numsy)) for idx, num in enumerate(numsx)])/(stdev(numsx)*stdev(numsy))
+        return self.mean([(numsx[idx]-self.mean(numsx))*(numsy[idx]-self.mean(numsy)) for idx, num in enumerate(numsx)])/(self.population_stdev(numsx)*self.population_stdev(numsy))
 
     #this function will calculate a 95% confidence interval for the mean of a large sample size
     def confidence_interval(self,nums, sampleMean):

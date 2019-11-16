@@ -84,37 +84,39 @@ class MyTestCase(unittest.TestCase):
             self.assertAlmostEqual(self.calculator.result, result)
             self.assertNotEqual(self.calculator.zscore(nums, sample), result-1)
             self.assertNotEqual(self.calculator.result, result-1)
-""" 
+
     def test_population_correlation_coefficient(self):
-        test_data = CsvReader('/Tests/Data/unit_test_population_correlation_coefficient.csv').data
+        test_data = CsvReader('./Tests/Data/unit_test_population_correlation_coefficient.csv').data
         for row in test_data:
-            self.assertEqual(self.calculator.population_correlation_coefficient(row['Value 1'],row['Value 2'],row['Value 3']), Decimal(row['Result']).quantize(Decimal('.001')))
-            self.assertEqual(self.calculator.result, Decimal(row['Result']).quantize(Decimal('.001')))
+            numsx = [float(val) for val in row['numsx'].split('_')]
+            numsy = [float(val) for val in row['numsy'].split('_')]
+            result = float(row['result'])
+            self.assertAlmostEqual(self.calculator.population_correlation_coefficient(numsx, numsy), result)
+            self.assertAlmostEqual(self.calculator.result, result)
+            self.assertNotEqual(self.calculator.population_correlation_coefficient(numsx, numsy), result-1)
+            self.assertNotEqual(self.calculator.result, result-1)
 
     def test_confidence_interval(self):
-        test_data = CsvReader('/Tests/Data/unit_test_confidence_interval.csv').data
+        test_data = CsvReader('./Tests/Data/unit_test_confidence_interval.csv').data
         for row in test_data:
-            self.assertEqual(
-                self.calculator.confidence_interval(row['Value 1'], row['Value 2'], row['Value 3']),
-                Decimal(row['Result']).quantize(Decimal('.001')))
-            self.assertEqual(self.calculator.result, Decimal(row['Result']).quantize(Decimal('.001')))
+            nums = [float(val) for val in row['nums'].split('_')]
+            sampleMean = float(row['sampleMean'])
+            result = [float(val) for val in row['result'].split('_')]
+            val = self.calculator.confidence_interval(nums, sampleMean)
+            self.assertAlmostEqual(val[0], result[0])
+            self.assertAlmostEqual(val[1], result[1])
+            self.assertNotEqual(val[0], result[0]-1)
+            self.assertNotEqual(val[1], result[1]-1)
+            
 
-    def test_population_variance(self):
-        test_data = CsvReader('/Tests/Data/unit_test_population_variance.csv').data
-        for row in test_data:
-            self.assertEqual(
-                self.calculator.population_variance(row['Value 1'], row['Value 2'], row['Value 3']),
-                Decimal(row['Result']).quantize(Decimal('.001')))
-            self.assertEqual(self.calculator.result, Decimal(row['Result']).quantize(Decimal('.001')))
-
-    def test_p_value(self):
-        test_data = CsvReader('/Tests/Data/unit_test_p_value.csv').data
-        for row in test_data:
-            self.assertEqual(
-                self.calculator.p_value(row['Value 1'], row['Value 2'], row['Value 3']),
-                Decimal(row['Result']).quantize(Decimal('.001')))
-            self.assertEqual(self.calculator.result, Decimal(row['Result']).quantize(Decimal('.001')))
-
+    # def test_p_value(self):
+    #     test_data = CsvReader('/Tests/Data/unit_test_p_value.csv').data
+    #     for row in test_data:
+    #         self.assertEqual(
+    #             self.calculator.p_value(row['Value 1'], row['Value 2'], row['Value 3']),
+    #             Decimal(row['Result']).quantize(Decimal('.001')))
+    #         self.assertEqual(self.calculator.result, Decimal(row['Result']).quantize(Decimal('.001')))
+"""
     def test_proportion(self):
         test_data = CsvReader('/Tests/Data/unit_test_proportion.csv').data
         for row in test_data:
