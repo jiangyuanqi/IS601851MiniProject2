@@ -1,10 +1,6 @@
 import csv
 from os import path
 
-def ClassFactory(class_name, dictionary):
-    return type(class_name, (object,), dictionary)
-
-
 class CsvReader:
     data = []
 
@@ -17,9 +13,3 @@ class CsvReader:
             for row in csv_data:
                 self.data.append(row)
         pass
-
-    def return_data_as_objects(self, class_name):
-        objects = []
-        for row in self.data:
-            objects.append(ClassFactory(class_name, row))
-        return objects
