@@ -1,8 +1,6 @@
 
-# IS 601 851 Mini Project2 
-# Samuel Carlos & Yuanqi Jiang
-# 2019 Fall
-# 10/30/2019
+# Mini Project: sqlAlchemy
 
-### Screenshot of the successful tests
-![tests_success](/Tests/Data/project2_success.png)
+# Yuanqi Jiang
+# 2019 Fall
+# 12/4/2019
