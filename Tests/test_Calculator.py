@@ -172,5 +172,6 @@ class MyTestCase(unittest.TestCase):
             self.assertNotEqual(self.calculator.variance_of_population_proportion(nums), result-1)
             self.assertNotEqual(self.calculator.result, result-1)
 
+
 if __name__ == '__main__':
     unittest.main()
